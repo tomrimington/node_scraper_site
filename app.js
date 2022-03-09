@@ -8,20 +8,22 @@ const pool = new Pool({
   password: "Toothemoon69",
   database: "Test_db",
 });
-async () => {
-  app.get("/", (req, res) => {
+
+app.get("/", (req, res) => {
+  async () => {
     pool.query("select * from public.solana2 where id=1", (err, res) => {
       if (!err) {
-        queryresult = res.rows[0];
+        let queryresult = res.rows[0];
         console.log(queryresult);
+        return queryresult;
       } else {
         console.log(err.message);
       }
       console.log("row added");
     });
-    res.send("welcome to the homepage bitchhhh", await queryresult);
-  });
-};
+    res.send("welcome to the homepage bitchhhh", queryresult);
+  };
+});
 
 const PORT = process.env.port || 3000;
 app.listen(PORT, () => {
