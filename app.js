@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
-import * as pg from "pg";
-const { Pool } = pg.default;
+const { Pool } = require("pg");
 const pool = new Pool({
   connectionlimit: 50,
   host: "testdb.chzn6cnaazyl.eu-west-2.rds.amazonaws.com",
@@ -21,7 +20,11 @@ app.listen(PORT, () => {
 
 pool.query("select * from public.solana2 where id=1", (err, res) => {
   if (!err) {
-    queryresult = result.rows[0][data];
+    queryresult = res.rows[0];
+    console.log(queryresult);
+    app.get("/", (req, res) => {
+      res.send(queryresult);
+    });
     return queryresult;
   } else {
     console.log(err.message);
