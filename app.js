@@ -14,7 +14,14 @@ app.listen(PORT, () => {
 });
 
 const { Pool } = require("pg");
-const pool = new Pool({
+// const client = new Pool({
+//   host: "testdb.chzn6cnaazyl.eu-west-2.rds.amazonaws.com",
+//   user: "postgres",
+//   post: 5432,
+//   password: "Toothemoon69",
+//   database: "Test_db"
+// })
+const client = new Pool({
   
   host: process.env.RDS_HOSTNAME,
   user: process.env.RDS_USERNAME,
@@ -24,7 +31,7 @@ const pool = new Pool({
 });
 
 
-  pool.query("select * from public.solana2 where id='1'", (err, res) => {
+  client.query("select * from solana where id='1'", (err, res) => {
     if (!err) {
       let queryresult = res.rows[0];
       console.log(queryresult);
