@@ -4,7 +4,7 @@ const app = express();
 
 app.get("/", (req, res) => {
   
-    res.send("welcome to the homepage bitchhhh", queryresult);
+    res.send("welcome to the homepage bitchhhh");
   
 });
 
